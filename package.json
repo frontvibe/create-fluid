@@ -20,7 +20,9 @@
 		"dev": "npm run build -- --watch",
 		"start": "node ./create-fluid.mjs",
 		"typecheck": "tsc --noEmit",
-		"format": "prettier --write --ignore-unknown ."
+		"format": "prettier --write --ignore-unknown .",
+		"changeset": "changeset add",
+		"version": "changeset version"
 	},
 	"files": [
 		"dist",
