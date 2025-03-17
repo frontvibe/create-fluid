@@ -24,9 +24,8 @@ pnpm create fluid
 
 May be provided in place of prompts
 
-| Name                         | Description                                |
-| :--------------------------- | :----------------------------------------- |
-| `--help` (`-h`)              | Display available flags.                   |
-| `--template <name>`          | Specify your template.                     |
-| `--install` / `--no-install` | Install dependencies (or not).             |
-| `--git` / `--no-git`         | Initialize git repo (or not).              |
+| Name                         | Description                    |
+| :--------------------------- | :----------------------------- |
+| `--help` (`-h`)              | Display available flags.       |
+| `--install` / `--no-install` | Install dependencies (or not). |
+| `--git` / `--no-git`         | Initialize git repo (or not).  |
