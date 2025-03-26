@@ -1,5 +1,7 @@
 import { color, say as houston, label } from '@astrojs/cli-kit';
 import { align, sleep } from '@astrojs/cli-kit/utils';
+import fs from 'node:fs';
+import path from 'node:path';
 import stripAnsi from 'strip-ansi';
 
 let stdout = process.stdout;
@@ -39,34 +41,48 @@ export const error = async (prefix: string, text: string) => {
 	}
 };
 
-export const nextSteps = async ({ projectDir, devCmd }: { projectDir: string; devCmd: string }) => {
+export const nextSteps = async ({
+	projectDir,
+	devCmd,
+	cwd,
+}: {
+	projectDir: string;
+	devCmd: string;
+	cwd: string;
+}) => {
 	const max = stdout.columns;
 	const prefix = max < 80 ? ' ' : ' '.repeat(9);
-	await sleep(200);
-	log(
-		`\n ${color.bgCyan(` ${color.black('next')} `)}  ${color.bold(
-			'Liftoff confirmed. Explore your project!',
-		)}`,
-	);
+
+	log(`\n ${color.bgCyan(` ${color.black('next')} `)}  ${color.bold('Explore your project!')}`);
 
 	await sleep(100);
+
 	if (projectDir !== '') {
 		projectDir = projectDir.includes(' ') ? `"./${projectDir}"` : `./${projectDir}`;
 		const enter = [
 			`\n${prefix}Enter your project directory using`,
-			color.cyan(`cd ${projectDir}`, ''),
+			color.cyan(`cd ${projectDir}.`, ''),
 		];
 		const len = enter[0].length + stripAnsi(enter[1]).length;
 		log(enter.join(len > max ? '\n' + prefix : ' '));
 	}
+
+	if (!fs.existsSync(path.join(cwd, '.env'))) {
+		log(
+			`${prefix}Don't forget to create a ${color.cyan(
+				'.env',
+			)} file based on ${color.cyan('.env.template')}.`,
+		);
+	}
+
 	log(
-		`${prefix}Don't forget to create a ${color.cyan(
-			'.env',
-		)} file based on ${color.cyan('.env.example')}.`,
+		`${prefix}To automatically synchronize your Shopify products and collections with your Sanity project,\n${prefix}add the Sanity Connect app in your Shopify store: ${color.cyan('https://apps.shopify.com/sanity-connect')}.`,
 	);
+
 	log(
 		`${prefix}Run ${color.cyan(devCmd)} to start the dev server. ${color.cyan('CTRL+C')} to stop.`,
 	);
+
 	await sleep(200);
 };
 

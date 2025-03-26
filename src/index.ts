@@ -7,6 +7,8 @@ import { verify } from './actions/verify.js';
 import { template } from './actions/template.js';
 import { dependencies } from './actions/dependencies.js';
 import { git } from './actions/git.js';
+import { hydrogen } from './actions/hydrogen.js';
+import { sanity } from './actions/sanity.js';
 
 const exit = () => process.exit(0);
 process.on('SIGINT', exit);
@@ -24,7 +26,7 @@ export async function main() {
 		return;
 	}
 
-	const steps = [verify, projectName, template, dependencies, git];
+	const steps = [verify, projectName, template, dependencies, hydrogen, sanity, git];
 
 	for (const step of steps) {
 		await step(ctx);

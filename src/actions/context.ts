@@ -12,6 +12,9 @@ export interface Context {
 	template?: string;
 	install?: boolean;
 	git?: boolean;
+	hydrogen?: boolean;
+	confirmHydrogen?: boolean;
+	sanity?: boolean;
 	stdin?: typeof process.stdin;
 	stdout?: typeof process.stdout;
 	exit(code: number): never;

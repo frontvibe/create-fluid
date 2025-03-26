@@ -14,7 +14,7 @@ export async function next(ctx: Pick<Context, 'cwd' | 'packageManager'>) {
 	};
 
 	const devCmd = commandMap[ctx.packageManager as keyof typeof commandMap] || 'npm run dev';
-	await nextSteps({ projectDir, devCmd });
+	await nextSteps({ projectDir, devCmd, cwd: ctx.cwd });
 
 	return;
 }

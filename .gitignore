@@ -10,6 +10,7 @@ _site/
 package-lock.json
 .eslintcache
 .pnpm-store
+demo/
 
 # do not commit .env files or any files that end with `.env`
 *.env
